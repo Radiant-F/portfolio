@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "portfolio",
+    "name": "Koi's Portfolio",
     "slug": "portfolio",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -8,26 +8,47 @@
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "backgroundColor": "#1a191f",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.exkoi.dev.portfolio"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "foregroundImage": "./assets/images/icon-foreground.png",
+        "backgroundImage": "./assets/images/icon-background.png",
+        "monochromeImage": "./assets/images/icon-monochrome.png"
+      },
+      "package": "com.exkoi.dev.portfolio"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon.png",
+      "name": "Koi's Portfolio",
+      "shortName": "ExKoi",
+      "backgroundColor": "#1a191f",
+      "splash": {
+        "backgroundColor": "#1a191f"
+      }
     },
     "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Manrope-Bold.ttf",
+            "./assets/fonts/Manrope-Regular.ttf",
+            "./assets/fonts/Manrope-ExtraBold.ttf",
+            "./assets/fonts/Manrope-SemiBold.ttf"
+          ]
+        }
+      ],
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/icon-splash.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
@@ -36,6 +57,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "6bd8c51b-8f17-4eed-a4c5-bacf2430c35f"
+      }
+    },
+    "owner": "exkoi.dev"
   }
 }
