@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { useEffect, useState } from "react";
 import { mmkv } from "@/utils";
 import { applySettings } from "@/redux/slice/settings";
+import Head from "expo-router/head";
 
 export default function App() {
   const rootNavigation = useRootNavigationState();
@@ -28,6 +29,27 @@ export default function App() {
 
   return (
     <Provider store={store}>
+      {/* web */}
+      {Platform.OS == "web" && (
+        <Head>
+          <title>Koi's Portfolio 🎏</title>
+          <meta
+            property="og:image"
+            content="https://github.com/Radiant-F/portfolio/blob/main/assets/app/web/icon-192.png?raw=true"
+          />
+          <meta property="og:title" content="Koi's Portfolio" />
+          <meta
+            property="og:description"
+            content="Check out my website! You might find easter egg about me~"
+          />
+          <meta property="og:url" content="https://exkoi.expo.app" />
+          <meta property="og:type" content="website" />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+          <link rel="manifest" href="/site.webmanifest" />
+        </Head>
+      )}
+
       {fontReady && <RootLayout />}
       {!appReady && <LoadingStartup />}
     </Provider>
