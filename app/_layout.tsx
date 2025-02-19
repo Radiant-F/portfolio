@@ -3,7 +3,8 @@ import { ManropeBold } from "@/constant";
 import { useFonts } from "expo-font";
 import { useRootNavigationState } from "expo-router";
 import { Drawer } from "expo-router/drawer";
-import { Platform, StatusBar } from "react-native";
+import { Platform } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider } from "react-redux";
 import { store } from "@/redux";
@@ -85,7 +86,7 @@ function RootLayout() {
       </Drawer>
 
       {Platform.OS == "android" && (
-        <StatusBar backgroundColor={colors.header} barStyle={"light-content"} />
+        <StatusBar backgroundColor={colors.header} style="light" />
       )}
     </GestureHandlerRootView>
   );
