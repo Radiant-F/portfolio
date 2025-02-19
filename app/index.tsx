@@ -17,7 +17,7 @@ export default function Home() {
     <View style={{ flex: 1 }}>
       <FluidAnimation />
 
-      <Gap flex={width >= 1000 ? 0.5 : 0.25} />
+      <Gap flex={width >= 1000 ? 0.5 : 0.2} />
 
       <View
         style={{
@@ -46,6 +46,15 @@ export default function Home() {
             title="Check out my works"
             iconRightMCI="chevron-right"
             textGap={5}
+            style={styles.btn}
+          />
+          <Gap height={10} />
+          <ButtonCommon
+            onPress={() => router.navigate("/about")}
+            title="More about me"
+            iconRightMCI="chevron-right"
+            textGap={5}
+            primary={false}
             style={styles.btn}
           />
         </View>
