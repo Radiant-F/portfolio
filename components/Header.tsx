@@ -67,7 +67,7 @@ export default function Header() {
       <Gap width={20} />
 
       <Image
-        source={require("@/assets/images/me.png")}
+        source={require("@/assets/images/me.jpg")}
         resizeMethod="resize"
         style={styles.img}
       />
