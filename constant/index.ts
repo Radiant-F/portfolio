@@ -1,8 +1,3 @@
-export const ManropeRegular = "ManropeRegular",
-  ManropeBold = "ManropeBold",
-  ManropeSemiBold = "ManropeSemiBold",
-  ManropeExtraBold = "ManropeExtraBold";
-
 import { galery } from "./home";
 export { galery };
 
