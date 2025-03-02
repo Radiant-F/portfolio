@@ -1,4 +1,4 @@
-import { Button, View } from "react-native";
+import { Button, View, Text as TextDefault } from "react-native";
 import { Gap, Text } from "@/components";
 import { router } from "expo-router";
 
@@ -18,6 +18,23 @@ export default function Lost() {
           router.replace("/");
         }}
       />
+      <TextDefault
+        style={{
+          fontFamily: "font",
+          fontSize: 50,
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          height: 30,
+          textAlign: "center",
+          textAlignVertical: "center",
+          color: "black",
+          opacity: 0.1,
+        }}
+        selectable={false}
+      >
+        dying
+      </TextDefault>
     </View>
   );
 }
