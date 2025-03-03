@@ -51,7 +51,8 @@
     "react-native-webview": "13.12.5",
     "react-redux": "^9.2.0",
     "reanimated-color-picker": "^3.0.6",
-    "tinycolor2": "^1.6.0"
+    "tinycolor2": "^1.6.0",
+    "expo-linear-gradient": "~14.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
