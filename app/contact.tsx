@@ -1,6 +1,6 @@
 import { FlatList, Linking, StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { ManropeExtraBold, contacts, type ContactType } from "@/constant";
+import { contacts, type ContactType } from "@/constant";
 import {
   Text,
   Gap,
@@ -85,9 +85,9 @@ export default function Contact() {
       ListFooterComponent={<Gap bottomGapNavBar />}
       contentContainerStyle={styles.container}
       ListHeaderComponent={
-        <Text style={styles.title}>
+        <Text style={{ fontSize: 30 }} bold>
           Get in{" "}
-          <Text style={{ fontFamily: ManropeExtraBold }} highlight>
+          <Text bold highlight>
             Touch
           </Text>
           !
@@ -109,7 +109,9 @@ export default function Contact() {
                 <View style={styles.containerIcon}>
                   <item.Icon name={item.iconName} color="#e1f2fe" size={30} />
                 </View>
-                <Text style={styles.textSocialName}>{item.name}</Text>
+                <Text style={styles.textSocialName} bold>
+                  {item.name}
+                </Text>
                 <ButtonCommon
                   style={styles.btnLink}
                   primary={false}
@@ -195,7 +197,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textSocialName: {
-    fontFamily: ManropeExtraBold,
     fontSize: 17,
     flex: 1,
     textAlign: "center",
@@ -218,10 +219,5 @@ const styles = StyleSheet.create({
     width: "85%",
     maxWidth: 600,
     marginVertical: 40,
-  },
-  title: {
-    fontFamily: ManropeExtraBold,
-    fontSize: 30,
-    // textAlign: "center",
   },
 });
