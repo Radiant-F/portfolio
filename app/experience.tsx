@@ -1,11 +1,6 @@
 import { FlatList, Image, Pressable, StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import {
-  ManropeBold,
-  ManropeExtraBold,
-  experiences,
-  type ExperienceType,
-} from "@/constant";
+import { experiences, type ExperienceType } from "@/constant";
 import {
   Text,
   Gap,
@@ -60,7 +55,9 @@ export default function Experience() {
                 }
               >
                 <View style={{ flex: 1 }}>
-                  <Text style={styles.textCompanyTitle}>• {item.company}</Text>
+                  <Text style={{ fontSize: 17 }} bold>
+                    • {item.company}
+                  </Text>
                   <Image
                     source={item.image}
                     resizeMethod="resize"
@@ -77,7 +74,9 @@ export default function Experience() {
               </Pressable>
 
               <CollapsibleContent visible={detailIndex == index}>
-                <Text style={styles.textRole}>{item.role}</Text>
+                <Text style={styles.textRole} highlight semiBold>
+                  {item.role}
+                </Text>
                 {item.achievement.map((value, i) => {
                   return (
                     <Text key={i} style={{ marginVertical: 5 }}>
@@ -86,7 +85,9 @@ export default function Experience() {
                   );
                 })}
                 <Gap height={10} />
-                <Text style={{ textAlign: "center" }}>{item.contract}</Text>
+                <Text style={{ textAlign: "center" }} semiBold>
+                  {item.contract}
+                </Text>
               </CollapsibleContent>
             </View>
           </Animated.View>
@@ -98,7 +99,6 @@ export default function Experience() {
 
 const styles = StyleSheet.create({
   textRole: {
-    fontFamily: ManropeBold,
     textAlign: "center",
     marginHorizontal: 10,
     marginVertical: 5,
@@ -106,10 +106,6 @@ const styles = StyleSheet.create({
   btnHeader: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  textCompanyTitle: {
-    fontFamily: ManropeExtraBold,
-    fontSize: 17,
   },
   viewContainer: {
     padding: 20,
@@ -121,10 +117,5 @@ const styles = StyleSheet.create({
     width: "85%",
     maxWidth: 600,
     marginVertical: 40,
-  },
-  title: {
-    fontFamily: ManropeExtraBold,
-    fontSize: 30,
-    // textAlign: "center",
   },
 });
