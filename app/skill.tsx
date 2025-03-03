@@ -8,7 +8,7 @@ import {
   LoadingOverlay,
   Card,
 } from "@/components";
-import { ManropeBold, ManropeExtraBold, skills, SkillType } from "@/constant";
+import { skills, SkillType } from "@/constant";
 import { useIsFocused } from "@react-navigation/native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useAppSelector } from "@/hooks";
@@ -40,9 +40,9 @@ export default function Skills() {
       contentContainerStyle={styles.container}
       ListHeaderComponent={
         <View>
-          <Text style={styles.title}>
+          <Text style={{ fontSize: 30 }} bold>
             Checkout My{" "}
-            <Text style={{ fontFamily: ManropeExtraBold }} highlight>
+            <Text bold highlight>
               Poisons
             </Text>
             .
@@ -68,7 +68,9 @@ export default function Skills() {
                 }
               >
                 <item.Svg height={70} width={70} />
-                <Text style={styles.textAppName}>{item.title}</Text>
+                <Text style={styles.textAppName} bold>
+                  {item.title}
+                </Text>
                 <IconMCI
                   iconNameMCI={
                     detailIndex === index ? "chevron-up" : "chevron-down"
@@ -81,7 +83,7 @@ export default function Skills() {
                 <View style={styles.containerDetail}>
                   {item.ability.map((v, i) => (
                     <View key={i} style={styles.viewDetail}>
-                      <Text highlight style={{ fontFamily: ManropeBold }}>
+                      <Text highlight semiBold>
                         {v.title}
                       </Text>
                       <Gap height={5} />
@@ -119,7 +121,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   textAppName: {
-    fontFamily: ManropeExtraBold,
     flex: 1,
     marginHorizontal: 10,
     fontSize: 17,
@@ -129,9 +130,5 @@ const styles = StyleSheet.create({
     width: "85%",
     maxWidth: 600,
     marginVertical: 40,
-  },
-  title: {
-    fontFamily: ManropeExtraBold,
-    fontSize: 30,
   },
 });
