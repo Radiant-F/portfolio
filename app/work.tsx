@@ -18,7 +18,7 @@ import {
   ButtonCommon,
   Card,
 } from "@/components";
-import { ManropeExtraBold, works, type WorkType } from "@/constant";
+import { works, type WorkType } from "@/constant";
 import { useIsFocused } from "@react-navigation/native";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useAppSelector } from "@/hooks";
@@ -47,8 +47,8 @@ export default function Work() {
       showsVerticalScrollIndicator={false}
       ListFooterComponent={<Gap bottomGapNavBar />}
       ListHeaderComponent={
-        <Text style={styles.title}>
-          <Text style={{ fontFamily: ManropeExtraBold }} highlight>
+        <Text bold style={{ fontSize: 30 }}>
+          <Text bold highlight>
             Cool Stuff
           </Text>{" "}
           Ahead!
@@ -78,7 +78,9 @@ export default function Work() {
                   style={{ width: 50, height: 50, borderRadius: 10 }}
                   resizeMethod="resize"
                 />
-                <Text style={styles.textAppName}>{item.name}</Text>
+                <Text style={styles.textAppName} bold>
+                  {item.name}
+                </Text>
                 <IconMCI
                   iconNameMCI={
                     detailIndex == index ? "chevron-up" : "chevron-down"
@@ -178,7 +180,6 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   textAppName: {
-    fontFamily: ManropeExtraBold,
     flex: 1,
     marginHorizontal: 10,
     fontSize: 17,
@@ -188,10 +189,5 @@ const styles = StyleSheet.create({
     width: "85%",
     maxWidth: 600,
     marginVertical: 40,
-  },
-  title: {
-    fontFamily: ManropeExtraBold,
-    fontSize: 30,
-    // textAlign: "center",
   },
 });
