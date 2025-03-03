@@ -1,82 +1,43 @@
-import {
-  ButtonCommon,
-  FluidAnimation,
-  Galery,
-  Gap,
-  Social,
-  Text,
-} from "@/components";
-import { ManropeExtraBold } from "@/constant";
-import { router } from "expo-router";
-import { StyleSheet, useWindowDimensions, View } from "react-native";
+import { FluidAnimation, Galery, Gap, Social, Welcome } from "@/components";
+import { useAppSelector } from "@/hooks";
+import { StyleSheet, View } from "react-native";
 
 export default function Home() {
-  const { width } = useWindowDimensions();
+  const show_galery = useAppSelector(
+    (state) => state.settings.layout_home.show_galery
+  );
 
   return (
     <View style={{ flex: 1 }}>
       <FluidAnimation />
+      <Social />
 
-      <Gap flex={width >= 1000 ? 0.5 : 0.2} />
+      <View style={{ flex: 1 }} />
 
       <View
         style={{
           ...styles.container,
-          flexDirection: width >= 1000 ? "row" : "column",
-          alignSelf: width >= 1000 ? "auto" : "center",
+          flexDirection: show_galery ? "row" : undefined,
         }}
       >
-        <View style={{ maxWidth: 375 }}>
-          <Gap flex={0.25} />
-          <Text style={{ fontFamily: ManropeExtraBold, fontSize: 35 }}>
-            Welcome!{"\n"}The name is{" "}
-            <Text style={{ fontFamily: ManropeExtraBold }} highlight>
-              Radiant
-            </Text>
-            .
-          </Text>
-          <Gap height={15} />
-          <Text secondary>
-            A skilled mobile and web developer. Offer many solutions for your
-            front-end needs.
-          </Text>
-          <Gap height={20} />
-          <ButtonCommon
-            onPress={() => router.navigate("/work")}
-            title="Check out my works"
-            iconRightMCI="chevron-right"
-            textGap={5}
-            style={styles.btn}
-          />
-          <Gap height={10} />
-          <ButtonCommon
-            onPress={() => router.navigate("/about")}
-            title="More about me"
-            iconRightMCI="chevron-right"
-            textGap={5}
-            primary={false}
-            style={styles.btn}
-          />
-        </View>
-
-        {width >= 1000 && <Galery width={300 * 1.3} height={400 * 1.3} />}
+        <Welcome />
+        <Galery />
       </View>
 
-      <Gap flex={1} />
+      <View style={{ flex: 1 }} />
 
-      <Social />
+      <View style={{ height: 175 }} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  btn: {
-    width: 250,
-    height: 60,
-    borderRadius: 60 / 2,
-  },
   container: {
     padding: 20,
     justifyContent: "space-evenly",
+    alignItems: "center",
+    maxWidth: 1000,
+    alignSelf: "center",
+    width: "100%",
   },
 });
