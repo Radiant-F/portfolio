@@ -1,5 +1,4 @@
 import { Header, LoadingStartup } from "@/components";
-import { ManropeBold } from "@/constant";
 import { useFonts } from "expo-font";
 import { useRootNavigationState } from "expo-router";
 import { Drawer } from "expo-router/drawer";
@@ -19,10 +18,13 @@ export default function App() {
   const navigationReady = rootNavigation?.routes.length > 1;
 
   const [fontReady] = useFonts({
-    ManropeRegular: require("@/assets/fonts/Manrope-Regular.ttf"),
-    ManropeBold: require("@/assets/fonts/Manrope-Bold.ttf"),
-    ManropeSemiBold: require("@/assets/fonts/Manrope-SemiBold.ttf"),
-    ManropeExtraBold: require("@/assets/fonts/Manrope-ExtraBold.ttf"),
+    PJKTSansRegular: require("@/assets/fonts/PlusJakartaSans-Regular.ttf"),
+    PJKTSansItalic: require("@/assets/fonts/PlusJakartaSans-Italic.ttf"),
+    PJKTSansSemiBold: require("@/assets/fonts/PlusJakartaSans-SemiBold.ttf"),
+    PJKTSansSemiBoldItalic: require("@/assets/fonts/PlusJakartaSans-SemiBoldItalic.ttf"),
+    PJKTSansBold: require("@/assets/fonts/PlusJakartaSans-Bold.ttf"),
+    PJKTSansBoldItalic: require("@/assets/fonts/PlusJakartaSans-BoldItalic.ttf"),
+    font: require("@/assets/fonts/font.ttf"),
   });
 
   const appReady = fontReady && navigationReady;
@@ -80,15 +82,14 @@ function RootLayout() {
       <Drawer
         screenOptions={{
           headerShown: false,
-          sceneStyle: { backgroundColor: colors.background },
-          drawerActiveBackgroundColor: colors.button_highlight,
-          drawerActiveTintColor: colors.text_highlight,
-          drawerInactiveTintColor: colors.text_secondary,
-          drawerLabelStyle: { fontFamily: ManropeBold },
-          drawerStyle: { backgroundColor: colors.header },
+          sceneStyle: { backgroundColor: colors[50] },
+          drawerActiveBackgroundColor: colors[700],
+          drawerActiveTintColor: colors[50],
+          drawerInactiveTintColor: colors[900],
+          drawerLabelStyle: { fontFamily: "PJKTSansSemiBold" },
+          drawerStyle: { backgroundColor: colors[100] },
           lazy: performance == "default",
           headerStatusBarHeight: 100,
-          title: "Koi's Portfolio",
         }}
       >
         <Drawer.Screen
@@ -108,7 +109,7 @@ function RootLayout() {
       </Drawer>
 
       {Platform.OS == "android" && (
-        <StatusBar backgroundColor={colors.header} style="light" />
+        <StatusBar backgroundColor={colors[100]} style="light" />
       )}
     </GestureHandlerRootView>
   );
