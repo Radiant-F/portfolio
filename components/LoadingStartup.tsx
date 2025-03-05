@@ -9,9 +9,9 @@ export default function LoadingStartup() {
   return (
     <Animated.View
       exiting={FadeOut.delay(1500)}
-      style={{ ...styles.container, backgroundColor: colors.background }}
+      style={{ ...styles.container, backgroundColor: colors[50] }}
     >
-      <Text selectable={false} style={{ fontStyle: "italic", opacity: 0.25 }}>
+      <Text selectable={false} italic style={{ opacity: 0.25 }}>
         Hang in there! ...
       </Text>
       <View style={{ height: "10%" }} />
