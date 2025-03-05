@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import React, { useRef } from "react";
 import Text from "./Text";
-import { ManropeSemiBold } from "@/constant";
 import { useAppSelector } from "@/hooks";
 import { IconMCI, IconAD, IconFA6, type IconType } from "./Icons";
 import Gap from "./Gap";
@@ -72,11 +71,7 @@ export default function ButtonCommon({
       <Pressable
         onPress={onPress}
         style={[
-          {
-            backgroundColor: primary
-              ? colors.button_primary
-              : colors.button_secondary,
-          },
+          { backgroundColor: primary ? colors[700] : colors[200] },
           styles.container,
           style,
         ]}
@@ -89,33 +84,21 @@ export default function ButtonCommon({
           <IconMCI
             iconNameMCI={iconLeftMCI}
             size={25}
-            color={
-              primary
-                ? colors.button_text_primary
-                : colors.button_text_secondary
-            }
+            color={primary ? colors[50] : colors[900]}
           />
         )}
         {iconLeftFA6 && (
           <IconFA6
             iconNameFA6={iconLeftFA6}
             size={20}
-            color={
-              primary
-                ? colors.button_text_primary
-                : colors.button_text_secondary
-            }
+            color={primary ? colors[50] : colors[900]}
           />
         )}
         {iconLeftAD && (
           <IconAD
             iconNameFA6={iconLeftAD}
             size={25}
-            color={
-              primary
-                ? colors.button_text_primary
-                : colors.button_text_secondary
-            }
+            color={primary ? colors[50] : colors[900]}
           />
         )}
 
@@ -124,11 +107,9 @@ export default function ButtonCommon({
         {title && (
           <Text
             selectable={false}
+            semiBold
             style={{
-              fontFamily: ManropeSemiBold,
-              color: primary
-                ? colors.button_text_primary
-                : colors.button_text_secondary,
+              color: primary ? colors[50] : colors[900],
             }}
           >
             {title}
@@ -143,33 +124,21 @@ export default function ButtonCommon({
           <IconMCI
             iconNameMCI={iconRightMCI}
             size={25}
-            color={
-              primary
-                ? colors.button_text_primary
-                : colors.button_text_secondary
-            }
+            color={primary ? colors[50] : colors[900]}
           />
         )}
         {iconRightFA6 && (
           <IconFA6
             iconNameFA6={iconRightFA6}
             size={20}
-            color={
-              primary
-                ? colors.button_text_primary
-                : colors.button_text_secondary
-            }
+            color={primary ? colors[50] : colors[900]}
           />
         )}
         {iconRightAD && (
           <IconAD
             iconNameFA6={iconRightAD}
             size={25}
-            color={
-              primary
-                ? colors.button_text_primary
-                : colors.button_text_secondary
-            }
+            color={primary ? colors[50] : colors[900]}
           />
         )}
       </Pressable>
