@@ -6,7 +6,7 @@ import Gap from "./Gap";
 import { useAppSelector } from "@/hooks";
 
 export default function LoadingOverlay() {
-  const color = useAppSelector((state) => state.settings.theme.colors.text);
+  const colors = useAppSelector((state) => state.settings.theme.colors);
   const rotation = useRef(new Animated.Value(0)).current;
   const currentRotation = useRef(0);
 
@@ -54,10 +54,7 @@ export default function LoadingOverlay() {
         <Icon name="atom-variant" size={50} color={"#adc1d1"} />
       </Animated.View>
       <Gap height={5} />
-      <Text
-        selectable={false}
-        style={{ color, fontStyle: "italic", opacity: 0.5 }}
-      >
+      <Text selectable={false} style={{ opacity: 0.5 }} italic>
         {totallyRandomText[Math.floor(Math.random() * 8)]}
       </Text>
     </View>
