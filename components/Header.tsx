@@ -16,7 +16,7 @@ import { useSegments } from "expo-router";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { IconAD, IconMCI } from "./Icons";
 import Gap from "./Gap";
-import ModalSettings from "./ModalSettings";
+import ModalSettings from "./modal-settings";
 import { useAppSelector } from "@/hooks";
 
 const navigationMenu = [
@@ -51,7 +51,7 @@ export default function Header() {
       style={{
         ...styles.container,
         paddingTop,
-        backgroundColor: colors.header,
+        backgroundColor: colors[100],
       }}
     >
       {deviceWidth < headerWidth && (
@@ -148,7 +148,7 @@ function Navigator({ activeRouteName }: { activeRouteName: string }) {
           {
             width: indicatorWidth,
             transform: [{ translateX }],
-            backgroundColor: colors.button_highlight,
+            backgroundColor: colors[200],
           },
         ]}
       >
@@ -160,12 +160,9 @@ function Navigator({ activeRouteName }: { activeRouteName: string }) {
           activeRouteName == item.route
             ? undefined
             : isHovered == index
-            ? colors.button_secondary
+            ? colors[200]
             : undefined;
-        const color =
-          activeRouteName == item.route
-            ? colors.button_text_secondary
-            : colors.text_secondary;
+        const color = activeRouteName == item.route ? colors[900] : colors[400];
 
         return (
           <Pressable
