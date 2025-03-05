@@ -6,6 +6,7 @@ import LoadingOverlay from "./LoadingOverlay";
 import LoadingStartup from "./LoadingStartup";
 import Card from "./Card";
 import TextInput from "./TextInput";
+import ModalSettings from "./modal-settings";
 export {
   Text,
   Header,
@@ -15,6 +16,7 @@ export {
   LoadingStartup,
   Card,
   TextInput,
+  ModalSettings,
 };
 
 // icons
@@ -26,4 +28,5 @@ import FluidAnimation from "./home/FluidAnimation";
 import Social from "./home/Social";
 import ButtonCommon from "./ButtonCommon";
 import Galery from "./home/Galery";
-export { FluidAnimation, Social, ButtonCommon, Galery };
+import Welcome from "./home/Welcome";
+export { FluidAnimation, Social, ButtonCommon, Galery, Welcome };
