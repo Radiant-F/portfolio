@@ -16,39 +16,33 @@ export type IconType = {
 };
 
 export function IconMCI({ iconNameMCI, color, colorMuted, size }: IconType) {
-  const { icon, icon_muted } = useAppSelector(
-    (state) => state.settings.theme.colors
-  );
+  const { colors } = useAppSelector((state) => state.settings.theme);
   return (
     <MaterialCommunityIcons
       name={iconNameMCI}
-      color={color ? color : colorMuted ? icon_muted : icon}
+      color={color ? color : colors[900]}
       size={size}
     />
   );
 }
 
 export function IconFA6({ iconNameFA6, color, colorMuted, size }: IconType) {
-  const { icon, icon_muted } = useAppSelector(
-    (state) => state.settings.theme.colors
-  );
+  const { colors } = useAppSelector((state) => state.settings.theme);
   return (
     <FontAwesome6
       name={iconNameFA6}
-      color={color ? color : colorMuted ? icon_muted : icon}
+      color={color ? color : colors[900]}
       size={size}
     />
   );
 }
 
 export function IconAD({ iconNameAD, color, colorMuted, size }: IconType) {
-  const { icon, icon_muted } = useAppSelector(
-    (state) => state.settings.theme.colors
-  );
+  const { colors } = useAppSelector((state) => state.settings.theme);
   return (
     <AntDesign
       name={iconNameAD}
-      color={color ? color : colorMuted ? icon_muted : icon}
+      color={color ? color : colors[900]}
       size={size}
     />
   );
