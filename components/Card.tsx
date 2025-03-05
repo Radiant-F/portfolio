@@ -8,8 +8,8 @@ export default function Card({ children, style, ...rest }: ViewProps) {
     <View
       style={[
         {
-          backgroundColor: colors.card,
-          borderColor: colors.card_border,
+          backgroundColor: colors[100],
+          borderColor: colors[300],
           shadowRadius: 3,
           shadowOpacity: 0.25,
           shadowOffset: { width: 1, height: 1 },
