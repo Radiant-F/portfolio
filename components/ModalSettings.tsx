@@ -9,8 +9,6 @@ import {
 } from "react-native";
 import Text from "./Text";
 import {
-  ManropeBold,
-  ManropeSemiBold,
   theme_default,
   theme_pink,
   theme_amethyst,
@@ -35,7 +33,7 @@ import ColorPicker, {
   HueSlider,
   returnedResults,
 } from "reanimated-color-picker";
-import { generateTheme, mmkv } from "@/utils";
+import { generateMaterialPalette, generateTheme, mmkv } from "@/utils";
 
 const themes: ThemeType[] = [
   theme_default,
@@ -51,13 +49,17 @@ type Props = {
 
 export default function ModalSettings({ visible, onRequestClose }: Props) {
   const performance = useAppSelector((state) => state.settings.performance);
-  const { colors, mode } = useAppSelector((state) => state.settings.theme);
+  const { colors, mode, name } = useAppSelector(
+    (state) => state.settings.theme
+  );
   const dispatch = useAppDispatch();
 
   const [showColorPicker, setShowColorPicker] = useState(false);
   const onSelectColor = (pickedColor: returnedResults) => {
-    const theme = generateTheme(pickedColor.hex);
-    dispatch(setCustomTheme(theme));
+    // const colors = generateTheme(pickedColor.hex);
+    const colors = generateMaterialPalette(pickedColor.hex);
+    // dispatch(setCustomTheme(colors));
+    dispatch(setTheme({ palette: colors, name: "custom" }));
   };
 
   function onClose() {
@@ -68,7 +70,7 @@ export default function ModalSettings({ visible, onRequestClose }: Props) {
   function onSavePreferences() {
     mmkv.set(
       "settings",
-      JSON.stringify({ theme: { mode, colors }, performance })
+      JSON.stringify({ theme: { mode, colors, name }, performance })
     );
     onClose();
   }
@@ -78,7 +80,7 @@ export default function ModalSettings({ visible, onRequestClose }: Props) {
     mmkv.set(
       "settings",
       JSON.stringify({
-        theme: { mode: "default", colors: theme_default },
+        theme: { mode: "dark", colors: theme_default, name: "default" },
         performance: "default",
       })
     );
@@ -99,7 +101,7 @@ export default function ModalSettings({ visible, onRequestClose }: Props) {
             contentContainerStyle={{ padding: 25 }}
           >
             <View style={styles.header}>
-              <Text style={{ fontFamily: ManropeBold }}>Settings</Text>
+              <Text bold>Settings</Text>
               <TouchableOpacity
                 activeOpacity={0.75}
                 style={styles.btnClose}
@@ -122,6 +124,15 @@ export default function ModalSettings({ visible, onRequestClose }: Props) {
               <View style={styles.line} />
             </View>
             <Gap height={5} />
+            <View style={{ alignSelf: "center" }}>
+              <ButtonCommon
+                iconLeftMCI={mode == "dark" ? "weather-sunny" : "weather-night"}
+                title={`${mode == "dark" ? "Light" : "Dark"} Mode`}
+                textGap={10}
+                style={styles.btnThemeToggle}
+              />
+            </View>
+            <Gap height={5} />
             <View style={styles.viewThemes}>
               {themes.map((theme, i) => (
                 <ButtonCommon
@@ -129,12 +140,7 @@ export default function ModalSettings({ visible, onRequestClose }: Props) {
                   key={i}
                   style={{ ...styles.btnTheme, backgroundColor: theme.main }}
                   childern={
-                    <Text
-                      style={{
-                        color: theme.button_text_primary,
-                        fontFamily: ManropeSemiBold,
-                      }}
-                    >
+                    <Text semiBold style={{ color: theme.button_text_primary }}>
                       {theme.name}
                     </Text>
                   }
@@ -148,7 +154,7 @@ export default function ModalSettings({ visible, onRequestClose }: Props) {
               alignSelf="center"
               childern={
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Text style={{ fontFamily: ManropeSemiBold }}>Custom</Text>
+                  <Text semiBold>Custom</Text>
                   <Gap width={5} />
                   <Icon
                     iconNameMCI={
@@ -171,10 +177,13 @@ export default function ModalSettings({ visible, onRequestClose }: Props) {
                 <Gap height={5} />
                 <Panel1 />
               </ColorPicker>
-              <Text style={{ margin: 5 }}>
-                Tips: When picking, try to tap to the color you want instead of
-                dragging to avoid scrolling up or down.
-              </Text>
+              {Platform.OS == "android" ||
+                (Platform.OS == "ios" && (
+                  <Text style={{ margin: 5 }}>
+                    Tip: Tap to the color you want instead of dragging to avoid
+                    scrolling up or down.
+                  </Text>
+                ))}
             </CollapsibleContent>
 
             <Gap height={20} />
@@ -229,7 +238,7 @@ export default function ModalSettings({ visible, onRequestClose }: Props) {
                 activeOpacity={0.75}
                 onPress={onResetPreferences}
               >
-                <Text style={{ fontFamily: ManropeSemiBold }}>Reset</Text>
+                <Text semiBold>Reset</Text>
               </TouchableOpacity>
               <Gap width={20} />
               <ButtonCommon
@@ -247,6 +256,11 @@ export default function ModalSettings({ visible, onRequestClose }: Props) {
 }
 
 const styles = StyleSheet.create({
+  btnThemeToggle: {
+    height: 50,
+    paddingHorizontal: 20,
+    borderRadius: 50 / 2,
+  },
   colorPicker: {
     width: "100%",
     maxWidth: 300,
@@ -260,14 +274,14 @@ const styles = StyleSheet.create({
   btnThemeCustom: {
     height: 50,
     paddingHorizontal: 20,
-    borderRadius: 10,
+    borderRadius: 25,
     margin: 5,
     paddingRight: 15,
   },
   btnTheme: {
     height: 50,
     width: 90,
-    borderRadius: 10,
+    borderRadius: 25,
     margin: 5,
   },
   btnReset: {
