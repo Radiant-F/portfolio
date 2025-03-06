@@ -57,11 +57,11 @@ function ButtonSocial({ onPress, icon }: ButtonSocialProps) {
     <Animated.View style={{ transform: [{ scale }], alignSelf: "flex-start" }}>
       <Pressable
         onPress={onPress}
-        style={{ ...styles.btn, backgroundColor: colors.button_secondary }}
+        style={{ ...styles.btn, backgroundColor: colors[200] }}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
       >
-        <Icon iconNameFA6={icon} size={30} color={"#d0d0d0"} />
+        <Icon iconNameFA6={icon} size={30} />
       </Pressable>
     </Animated.View>
   );
