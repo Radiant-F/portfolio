@@ -1,10 +1,25 @@
 import { useAppSelector } from "@/hooks";
 import { Text as TextDefault, TextProps } from "react-native";
 
+const fonts = [
+  "PJKTSansRegular",
+  "PJKTSansItalic",
+  "PJKTSansSemiBold",
+  "PJKTSansSemiBoldItalic",
+  "PJKTSansBold",
+  "PJKTSansBoldItalic",
+];
+
 interface CustomTextProps extends TextProps {
   primary?: boolean;
   secondary?: boolean;
   highlight?: boolean;
+  regular?: boolean;
+  italic?: boolean;
+  semiBold?: boolean;
+  semiBoldItalic?: boolean;
+  bold?: boolean;
+  boldItalic?: boolean;
 }
 
 export default function Text({
@@ -13,6 +28,12 @@ export default function Text({
   primary,
   secondary,
   highlight,
+  regular,
+  italic,
+  semiBold,
+  semiBoldItalic,
+  bold,
+  boldItalic,
   ...rest
 }: CustomTextProps) {
   const colors = useAppSelector((state) => state.settings.theme.colors);
@@ -21,12 +42,24 @@ export default function Text({
     <TextDefault
       style={[
         {
-          fontFamily: "ManropeRegular",
+          fontFamily: regular
+            ? fonts[0]
+            : italic
+            ? fonts[1]
+            : semiBold
+            ? fonts[2]
+            : semiBoldItalic
+            ? fonts[3]
+            : bold
+            ? fonts[4]
+            : boldItalic
+            ? fonts[5]
+            : fonts[0],
           color: highlight
-            ? colors.text_highlight
+            ? colors[600]
             : secondary
-            ? colors.text_secondary
-            : colors.text,
+            ? colors[900]
+            : colors[900],
         },
         style,
       ]}
