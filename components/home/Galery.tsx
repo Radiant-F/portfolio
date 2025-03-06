@@ -1,5 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { View, Image, StyleSheet, Pressable } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  Pressable,
+  useWindowDimensions,
+} from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedScrollHandler,
@@ -8,8 +14,9 @@ import Animated, {
 } from "react-native-reanimated";
 import Text from "../Text";
 import Gap from "../Gap";
-import { ManropeSemiBold, galery } from "@/constant";
-import { useAppSelector } from "@/hooks";
+import { galery } from "@/constant";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { setShowGalery } from "@/redux/slice/settings";
 
 // get one random image from each work
 const getRandomImageFromEachWork = (): number[] => {
@@ -19,22 +26,13 @@ const getRandomImageFromEachWork = (): number[] => {
   });
 };
 
-type Props = {
-  width?: number;
-  height?: number;
-  scrollDelay?: number;
-};
-
-export default function Galery({
-  height = 400,
-  width = 300,
-  scrollDelay = 3000,
-}: Props) {
+export default function Galery() {
+  const dispatch = useAppDispatch();
   const colors = useAppSelector((state) => state.settings.theme.colors);
 
-  const IMAGE_WIDTH = width;
-  const IMAGE_HEIGHT = height;
-  const SCROLL_DELAY = scrollDelay;
+  const IMAGE_WIDTH = 400;
+  const IMAGE_HEIGHT = 500;
+  const SCROLL_DELAY = 3000; // ms
 
   const images = useMemo(() => getRandomImageFromEachWork(), []);
 
@@ -66,78 +64,87 @@ export default function Galery({
   };
 
   const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: -scrollX.value }],
-    };
+    return { transform: [{ translateX: -scrollX.value }] };
   });
 
-  return (
-    <View style={{ flexDirection: "row" }}>
-      <View
-        style={{
-          ...styles.container,
-          width: IMAGE_WIDTH,
-          height: IMAGE_HEIGHT,
-        }}
-      >
-        <Animated.ScrollView
-          horizontal
-          scrollEventThrottle={16}
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={{ flexDirection: "row" }}
-          onScroll={scrollHandler}
-          scrollEnabled={false}
-        >
-          <Animated.View style={[{ flexDirection: "row" }, animatedStyle]}>
-            {images.map((image, index) => (
-              <View key={index} style={{ backgroundColor: "black" }}>
-                <Image
-                  resizeMethod="resize"
-                  source={image}
-                  blurRadius={25}
-                  style={styles.imgBlur}
-                />
-                <Image
-                  resizeMethod="resize"
-                  resizeMode="contain"
-                  source={image}
-                  style={{ width: IMAGE_WIDTH, height: IMAGE_HEIGHT }}
-                />
-              </View>
-            ))}
-          </Animated.View>
-        </Animated.ScrollView>
-      </View>
-
-      <Gap width={5} />
-
-      <View>
-        {images.map((_, i) => {
-          const backgroundColor =
-              currentIndexState == i
-                ? colors.button_primary
-                : colors.button_secondary,
-            textColor =
-              currentIndexState == i ? colors.button_secondary : colors.text;
-
-          return (
-            <Pressable
-              style={{ ...styles.btnImgIndex, backgroundColor }}
-              onPress={() => scrollToIndex(i)}
-              key={i}
-            >
-              <Text
-                selectable={false}
-                style={{ color: textColor, fontFamily: ManropeSemiBold }}
-              >
-                {i + 1}
-              </Text>
-            </Pressable>
-          );
-        })}
-      </View>
-    </View>
+  const show_galery = useAppSelector(
+    (state) => state.settings.layout_home.show_galery
   );
+  const { width, height } = useWindowDimensions();
+
+  useEffect(() => {
+    if (width >= 1000 && height >= 700 && !show_galery) {
+      dispatch(setShowGalery(true));
+    } else if ((width < 1000 && show_galery) || (height < 700 && show_galery)) {
+      dispatch(setShowGalery(false));
+    }
+  }, [width, height]);
+
+  if (show_galery)
+    return (
+      <View style={{ flexDirection: "row" }}>
+        <View
+          style={{
+            ...styles.container,
+            width: IMAGE_WIDTH,
+            height: IMAGE_HEIGHT,
+          }}
+        >
+          <Animated.ScrollView
+            horizontal
+            scrollEventThrottle={16}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ flexDirection: "row" }}
+            onScroll={scrollHandler}
+            scrollEnabled={false}
+          >
+            <Animated.View style={[{ flexDirection: "row" }, animatedStyle]}>
+              {images.map((image, index) => (
+                <View key={index} style={{ backgroundColor: "black" }}>
+                  <Image
+                    resizeMethod="resize"
+                    source={image}
+                    blurRadius={25}
+                    style={styles.imgBlur}
+                  />
+                  <Image
+                    resizeMethod="resize"
+                    resizeMode="contain"
+                    source={image}
+                    style={{ width: IMAGE_WIDTH, height: IMAGE_HEIGHT }}
+                  />
+                </View>
+              ))}
+            </Animated.View>
+          </Animated.ScrollView>
+        </View>
+
+        <Gap width={5} />
+
+        <View>
+          {images.map((_, i) => {
+            const backgroundColor =
+                currentIndexState == i
+                  ? colors.button_primary
+                  : colors.button_secondary,
+              textColor =
+                currentIndexState == i ? colors.button_secondary : colors.text;
+
+            return (
+              <Pressable
+                style={{ ...styles.btnImgIndex, backgroundColor }}
+                onPress={() => scrollToIndex(i)}
+                key={i}
+              >
+                <Text selectable={false} style={{ color: textColor }} semiBold>
+                  {i + 1}
+                </Text>
+              </Pressable>
+            );
+          })}
+        </View>
+      </View>
+    );
 }
 
 const styles = StyleSheet.create({
