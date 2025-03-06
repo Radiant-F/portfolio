@@ -49,7 +49,7 @@ export default function FluidAnimation() {
       viewBox={`0 0 ${width} 200`}
       style={{ position: "absolute", bottom: 0 }}
     >
-      <AnimatedPath fill={colors.main} animatedProps={animatedProps} />
+      <AnimatedPath fill={colors[500]} animatedProps={animatedProps} />
     </Svg>
   );
 }
