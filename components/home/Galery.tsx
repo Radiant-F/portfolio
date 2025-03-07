@@ -124,11 +124,8 @@ export default function Galery() {
         <View>
           {images.map((_, i) => {
             const backgroundColor =
-                currentIndexState == i
-                  ? colors.button_primary
-                  : colors.button_secondary,
-              textColor =
-                currentIndexState == i ? colors.button_secondary : colors.text;
+                currentIndexState == i ? colors[900] : colors[200],
+              textColor = currentIndexState == i ? colors[50] : colors[900];
 
             return (
               <Pressable
