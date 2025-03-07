@@ -1,6 +1,5 @@
 import {
   FlatList,
-  Linking,
   Platform,
   Pressable,
   ScrollView,
@@ -8,15 +7,15 @@ import {
   View,
   Image,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CollapsibleContent,
   Text,
   Gap,
   IconMCI,
   LoadingOverlay,
-  ButtonCommon,
   Card,
+  Button,
 } from "@/components";
 import { works, type WorkType } from "@/constant";
 import { useIsFocused } from "@react-navigation/native";
@@ -120,13 +119,13 @@ export default function Work() {
                 <Gap height={10} />
                 <View style={{ flexDirection: "row", marginHorizontal: 15 }}>
                   {item.link.map((item, i) => (
-                    <ButtonCommon
+                    <Button
                       key={i}
                       primary={false}
                       title={item.name}
-                      iconLeftMCI={item.icon}
+                      iconLeft={item.icon}
                       style={styles.btnLink}
-                      textGap={5}
+                      styleText={{ marginLeft: 5 }}
                     />
                   ))}
                 </View>
