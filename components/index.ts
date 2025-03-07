@@ -7,6 +7,7 @@ import LoadingStartup from "./LoadingStartup";
 import Card from "./Card";
 import TextInput from "./TextInput";
 import ModalSettings from "./modal-settings";
+import Button from "./Button";
 export {
   Text,
   Header,
@@ -17,6 +18,7 @@ export {
   Card,
   TextInput,
   ModalSettings,
+  Button,
 };
 
 // icons
