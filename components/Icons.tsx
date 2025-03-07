@@ -15,35 +15,27 @@ export type IconType = {
   size?: number;
 };
 
-export function IconMCI({ iconNameMCI, color, colorMuted, size }: IconType) {
+export function IconMCI({ iconNameMCI: name, color, size }: IconType) {
   const { colors } = useAppSelector((state) => state.settings.theme);
   return (
     <MaterialCommunityIcons
-      name={iconNameMCI}
+      name={name}
       color={color ? color : colors[900]}
       size={size}
     />
   );
 }
 
-export function IconFA6({ iconNameFA6, color, colorMuted, size }: IconType) {
+export function IconFA6({ iconNameFA6: name, color, size }: IconType) {
   const { colors } = useAppSelector((state) => state.settings.theme);
   return (
-    <FontAwesome6
-      name={iconNameFA6}
-      color={color ? color : colors[900]}
-      size={size}
-    />
+    <FontAwesome6 name={name} color={color ? color : colors[900]} size={size} />
   );
 }
 
-export function IconAD({ iconNameAD, color, colorMuted, size }: IconType) {
+export function IconAD({ iconNameAD: name, color, size }: IconType) {
   const { colors } = useAppSelector((state) => state.settings.theme);
   return (
-    <AntDesign
-      name={iconNameAD}
-      color={color ? color : colors[900]}
-      size={size}
-    />
+    <AntDesign name={name} color={color ? color : colors[900]} size={size} />
   );
 }
