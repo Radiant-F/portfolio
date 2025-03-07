@@ -138,8 +138,6 @@ function Navigator({ activeRouteName }: { activeRouteName: string }) {
     navigation.dispatch(DrawerActions.jumpTo(navigationMenu[index].route));
   }
 
-  const [isHovered, setIsHovered] = useState<null | number>(null);
-
   return (
     <View style={styles.btnContainer}>
       <Animated.View
@@ -156,24 +154,18 @@ function Navigator({ activeRouteName }: { activeRouteName: string }) {
       </Animated.View>
 
       {navigationMenu.map((item, index) => {
-        const backgroundColor =
-          activeRouteName == item.route
-            ? undefined
-            : isHovered == index
-            ? colors[200]
-            : undefined;
-        const color = activeRouteName == item.route ? colors[900] : colors[400];
-
         return (
           <Pressable
             key={index}
-            style={{ ...styles.btnNavigation, backgroundColor }}
+            style={{ ...styles.btnNavigation }}
             onPress={() => onPress(index)}
             onLayout={onLayoutButton(index)}
-            onHoverIn={() => setIsHovered(index)}
-            onHoverOut={() => setIsHovered(null)}
           >
-            <Text selectable={false} style={{ color }}>
+            <Text
+              selectable={false}
+              highlight={activeRouteName == item.route}
+              secondary={activeRouteName != item.route}
+            >
               {item.name}
             </Text>
           </Pressable>
