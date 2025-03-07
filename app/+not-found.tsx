@@ -33,7 +33,7 @@ export default function Lost() {
         }}
         selectable={false}
       >
-        dying
+        4/25/9/14/7
       </TextDefault>
     </View>
   );
